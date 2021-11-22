@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/vscode/.nvm/v0.8.28/bin/node',
+1 verbose cli   '/home/vscode/.nvm/v0.8.28/bin/npm',
+1 verbose cli   'init' ]
+2 info using npm@1.2.30
+3 info using node@v0.8.28
+4 verbose read json /com.docker.devenvironments.code/myepicproject/package.json
+5 warn package.json @ No repository field.
+6 warn package.json @ No readme data.
+7 silly package data undefined
+8 info init written successfully
+9 error Error: canceled
+9 error     at Interface.<anonymous> (/home/vscode/.nvm/v0.8.28/lib/node_modules/npm/node_modules/read/lib/read.js:65:13)
+9 error     at Interface.EventEmitter.emit (events.js:126:20)
+9 error     at Interface._ttyWrite (readline.js:607:16)
+9 error     at ReadStream.onkeypress (readline.js:97:10)
+9 error     at ReadStream.EventEmitter.emit (events.js:126:20)
+9 error     at emitKey (readline.js:1058:12)
+9 error     at ReadStream.onData (readline.js:807:7)
+9 error     at ReadStream.EventEmitter.emit (events.js:96:17)
+9 error     at TTY.onread (net.js:397:14)
+10 error If you need help, you may report this log at:
+10 error     <http://github.com/isaacs/npm/issues>
+10 error or email it to:
+10 error     <npm-@googlegroups.com>
+11 error System Linux 5.10.16.3-microsoft-standard-WSL2
+12 error command "/home/vscode/.nvm/v0.8.28/bin/node" "/home/vscode/.nvm/v0.8.28/bin/npm" "init"
+13 error cwd /com.docker.devenvironments.code/myepicproject
+14 error node -v v0.8.28
+15 error npm -v 1.2.30
+16 verbose exit [ 1, true ]

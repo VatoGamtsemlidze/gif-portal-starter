@@ -4,22 +4,15 @@ import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import { Program, Provider, web3 } from '@project-serum/anchor';
 import idl from "./idl.json";
 import kp from './keypair.json'
+
 // Constants
-
-const TEST_GIFS = [
-  'https://media.giphy.com/media/pIBCeF0v9w3xyig9EA/giphy.gif',
-  'https://media.giphy.com/media/IW3siPEECnLpe/giphy.gif',
-  'https://media.giphy.com/media/kzNnkkfDTajxPZz83F/giphy.gif',
-  'https://media.giphy.com/media/nQ3SpKbnrOnyczamSc/giphy.gif'
-]
-
 const { SystemProgram, Keypair } = web3;
 
 // Create a keypair for the account that will hold the GIF data.
 const arr = Object.values(kp._keypair.secretKey)
 const secret = new Uint8Array(arr)
 const baseAccount = web3.Keypair.fromSecretKey(secret)
-
+console.log(baseAccount.publicKey)
 // Get our program's id from the IDL file.
 const programID = new PublicKey(idl.metadata.address);
 
@@ -74,7 +67,6 @@ const App = () => {
     try {
       const provider = getProvider();
       const program = new Program(idl, programID, provider);
-  
       await program.rpc.addGif(inputValue, {
         accounts: {
           baseAccount: baseAccount.publicKey,
@@ -83,12 +75,13 @@ const App = () => {
       });
       console.log("GIF successfully sent to program", inputValue)
   
-      await getGifList();
       setInputValue('');
+      await getGifList();
     } catch (error) {
       console.log("Error sending GIF:", error)
     }
   };
+  console.log(walletAddress)
   console.log(gifList)
   const connectWallet = async () => {
     const { solana } = window;
@@ -119,6 +112,7 @@ const App = () => {
     } else {
       return(
       <div className="connected-container">
+        <h3>Hello {walletAddress}</h3>
         {/* Go ahead and add this input and button to start */}
         <form
             onSubmit={sendGif}
@@ -141,7 +135,6 @@ const App = () => {
       </div>
       )}
   };
-
   const getProvider = () => {
     const connection = new Connection(network, opts.preflightCommitment);
     const provider = new Provider(
@@ -179,13 +172,12 @@ const App = () => {
     window.addEventListener('load', onLoad);
     return () => window.removeEventListener('load', onLoad);
   }, []);
-
   const getGifList = async() => {
     try {
       const provider = getProvider();
       const program = new Program(idl, programID, provider);
+      console.log(program.rpc)
       const account = await program.account.baseAccount.fetch(baseAccount.publicKey);
-      
       console.log("Got the account", account)
       setGifList(account.gifList)
   
